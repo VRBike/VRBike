@@ -39,13 +39,18 @@ public class PlayerController : MonoBehaviour {
 		//}
 		
 		//transform.eulerAngles = new Vector3(0,angle,0);
+		Movement();
+
+
 		
+	}
+	void Movement(){
+
 		speed = float.Parse(MC.getSpeed ());
 		angle += float.Parse (MC.getAxis())*Time.deltaTime*speed;
 		Debug.Log (speed);
 		transform.position += transform.forward*Time.deltaTime*speed;
 		
 		transform.eulerAngles = new Vector3(0,angle,0);
-		
 	}
 }
