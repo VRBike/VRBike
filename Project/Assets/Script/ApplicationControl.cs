@@ -5,12 +5,14 @@ using System.Collections;
 public class ApplicationControl : MonoBehaviour {
 
 	bool paused = false;
-	public GameObject canvas;
+	public GameObject PauseCanvas;
+	public GameObject AdjustCanvas;
 	private bool isShowing;
 
 	// Use this for initialization
 	void Start () {
-		canvas.SetActive (false);;
+		PauseCanvas.SetActive (false);
+		AdjustCanvas.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -28,13 +30,15 @@ public class ApplicationControl : MonoBehaviour {
 	public void OnPauseGame(){
 		print ("paused");
 		isShowing = !isShowing;
-		canvas.SetActive(true);
+		PauseCanvas.SetActive(true);
+		AdjustCanvas.SetActive (true);
 	}
 
 	public void OnResumeGame(){
 		print ("resume");
 		isShowing = !isShowing;
-		canvas.SetActive(false);
+		PauseCanvas.SetActive(false);
+		AdjustCanvas.SetActive (false);
 		paused = false;
 	}
 

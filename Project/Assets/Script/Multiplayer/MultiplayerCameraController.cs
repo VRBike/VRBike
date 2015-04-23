@@ -26,7 +26,6 @@ public class MultiplayerCameraController : MonoBehaviour {
 	void Update () {
 		if (target != null) {
 			transform.position = target.transform.position + positionOffset;
-			transform.rotation = target.transform.rotation;
 		}
 	}
 }

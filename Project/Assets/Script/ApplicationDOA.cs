@@ -9,6 +9,7 @@ public class ApplicationDOA{
 	private List<Vector3> generate_points_position = new List<Vector3>();
 	private Boolean passed = false;
 	private float Timer;
+	private Vector3 startPosition;
 
 	public ApplicationDOA (){
 
@@ -41,6 +42,14 @@ public class ApplicationDOA{
 
 	public float getTime (){
 		return Timer;
+	}
+
+	public void set_start_position(Vector3 position){
+		this.startPosition = position;
+	}
+
+	public Vector3 get_start_position(){
+		return startPosition;
 	}
 		
 	public Boolean passedCheckpoint(){
