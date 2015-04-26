@@ -7,25 +7,31 @@ public class MultiPlayerApplicationControl : MonoBehaviour {
 	public GameObject PauseCanvas;
 	public GameObject AdjustCanvas;
 	private bool isShowing;
-	
+	private bool inGame;
+
 	// Use this for initialization
 	void Start () {
 		PauseCanvas.SetActive (false);
 		AdjustCanvas.SetActive (false);
+		inGame = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		ApplicationDOA.getInstance ().startTimer ();
-		if (Cardboard.SDK.CardboardTriggered) {
-			if(paused == false){
-				OnPauseGame();
-				paused = true;
-				//OnApplicationPause(false);
+		if (inGame) {
+			ApplicationDOA.getInstance ().startTimer ();
+			if (Cardboard.SDK.CardboardTriggered) {
+				if (paused == false) {
+					OnPauseGame ();
+					paused = true;
+					//OnApplicationPause(false);
+				}
 			}
 		}
 	}
-	
+	public void SetInGame(bool bo){
+		inGame = bo;
+	}
 	public void OnPauseGame(){
 		print ("paused");
 		isShowing = !isShowing;

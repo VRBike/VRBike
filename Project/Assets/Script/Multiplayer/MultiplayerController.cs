@@ -8,15 +8,15 @@ public class MultiplayerController : MonoBehaviour {
 	private string gameName = "Room_Name";
 	public GameObject stage;
 	public GameObject player;
-	public GameObject item1;
-	public Text statusText;
-	public GameObject road;
+	public GameObject finish;
 
+	public GameObject road;
+	
 	private HostData[] hostList;
 	
 	public GameObject serverListPanel;
 	public GameObject serverNameButton;
-
+	
 	public Material mat1;
 	public Material mat2;
 
@@ -30,7 +30,8 @@ public class MultiplayerController : MonoBehaviour {
 	}
 
 	public void StartServer(Text serverName){
-		gameName = serverName.text;
+		//gameName = serverName.text;
+		gameName = "VRBike";
 		Network.InitializeServer (4, 25000, !Network.HavePublicAddress ());
 		MasterServer.RegisterHost (typeName,gameName);
 		GameObject.Find("Canvas").SetActive(false);
@@ -40,8 +41,9 @@ public class MultiplayerController : MonoBehaviour {
 	void OnServerInitialized()
 	{
 		Debug.Log ("Create Server Completed");
-		statusText.text = "Create Server Completed";
+		//statusText.text = "Create Server Completed";
 		CreateStage ();
+		Network.Instantiate (finish,new Vector3(-75.5f,1f,90f),Quaternion.identity, 0);
 		SpawnPlayer ();
 	}
 
@@ -62,11 +64,11 @@ public class MultiplayerController : MonoBehaviour {
 		if (msEvent == MasterServerEvent.HostListReceived) {
 				Debug.Log ("Found Server!!");
 				hostList = MasterServer.PollHostList ();
-				statusText.text = "Found Server!!  " + hostList.Length;
+				//statusText.text = "Found Server!!  " + hostList.Length;
 				ListServer ();
 			} else {
 				Debug.Log ("Server Not Found !!");
-				statusText.text = "Server Not Found !!";
+				//statusText.text = "Server Not Found !!";
 		}
 
 	}
@@ -97,8 +99,8 @@ public class MultiplayerController : MonoBehaviour {
 		
 	}
 	void OnConnectedToServer(){
-		Debug.Log ("Join Server Complete!!!");
-		statusText.text = "Join Server Complete!!!";
+		//Debug.Log ("Join Server Complete!!!");
+		//statusText.text = "Join Server Complete!!!";
 		//stage.SetActive (true);
 		//road.SetActive (true);
 
@@ -108,9 +110,21 @@ public class MultiplayerController : MonoBehaviour {
 	}
 	void SpawnPlayer(){
 		int num = Network.connections.Length;
-		Debug.Log (num);
-		Network.Instantiate(player,new Vector3((float)(0+(num*5)),2f,0f),Quaternion.identity, 0);
-		GameObject.Find ("Main Camera").GetComponent<MultiplayerCameraController>().GameStart();
+		if (num == 0) {
+			Network.Instantiate(player,new Vector3(-3,2f,0f),Quaternion.identity, 0);	
+		}
+		else if(num == 1){
+			Network.Instantiate(player,new Vector3(-1,2f,0f),Quaternion.identity, 0);
+		}
+		else if(num == 2){
+			Network.Instantiate(player,new Vector3(1,2f,0f),Quaternion.identity, 0);
+		}
+		else if(num == 3){
+			Network.Instantiate(player,new Vector3(3,2f,0f),Quaternion.identity, 0);
+		}
+		//Network.Instantiate(player,new Vector3((float)(0+(num*5)),2f,0f),Quaternion.identity, 0);
+		GameObject.Find ("CardboardMain").GetComponent<MultiplayerCameraController>().GameStart(num);
+		GameObject.Find ("ApplicationMaster").GetComponent<MultiPlayerApplicationControl>().SetInGame(true);
 	}
 
 

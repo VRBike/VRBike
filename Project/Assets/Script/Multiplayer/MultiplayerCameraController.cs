@@ -10,7 +10,7 @@ public class MultiplayerCameraController : MonoBehaviour {
 	void Start () {
 		active = false;
 	}
-	public void GameStart(){
+	public void GameStart(int num){
 		active = true;
 		GameObject[] p = GameObject.FindGameObjectsWithTag("Player");
 		
@@ -19,13 +19,29 @@ public class MultiplayerCameraController : MonoBehaviour {
 				target = p[i];
 			}
 		}
-		positionOffset = target.transform.position - new Vector3(0,1,0);
+		Vector3 offset = new Vector3(0,0,0);
+		
+		if (num == 0) {
+			offset = new Vector3(-3,1,0);
+		} 
+		else if (num == 1) {
+			offset = new Vector3(-1,1,0);
+		}
+		else if (num == 2) {
+			offset = new Vector3(1,1,0);
+		}
+		else if (num == 3) {
+			offset = new Vector3(3,1,0);
+		}
+		positionOffset = target.transform.position - offset;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (target != null) {
 			transform.position = target.transform.position + positionOffset;
+			transform.rotation = target.transform.rotation;
 		}
 	}
 }
