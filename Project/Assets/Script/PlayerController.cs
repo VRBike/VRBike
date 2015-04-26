@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour {
 	
-	float speed = 0;
-	float angle = 0;
+	public float speed = 0;
+	public float angle = 0;
 	NetworkScript MC;
-	
+
+	int count=0;
+	int count2=0;
+	float tmpspeed =0;
+
 	void Start(){
 		ApplicationDOA.getInstance ().set_age (24);
 		ApplicationDOA.getInstance ().set_weight (65);
 		MC = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkScript>();
+		speed = 0;
+		count = 0;
 	}
 	
 	void FixedUpdate(){
-		
+
 		//if (Input.GetKey (KeyCode.D)) {
 		
 		//	transform.position += transform.right*Time.deltaTime*speed;
@@ -46,12 +53,36 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	void Movement(){
-
-		speed = float.Parse(MC.getSpeed ());
-		angle += float.Parse (MC.getAxis())*Time.deltaTime*speed;
-		Debug.Log (speed);
+		speed = 0;
+		try{
+			
+			speed = float.Parse(MC.getSpeed ());
+			angle += float.Parse(MC.getAxis())*Time.deltaTime;
+		}
+		catch(Exception e){			
+		}
+		//Debug.Log (speed);
+		if (count == 15) {
+			count =0;
+			
+			
+			if(count2 == 3){
+				speed =0;
+				MC.setSpeed("0");
+				count2=0;
+			}
+			else if(tmpspeed==speed){
+				count2++;
+			}
+			else{
+				tmpspeed=speed;
+			}
+			
+		}
 		transform.position += transform.forward*Time.deltaTime*speed;
-		
-		transform.eulerAngles = new Vector3(0,angle,0);
+		if (speed != 0) {
+			transform.eulerAngles = new Vector3 (0, angle, 0);
+		}
+		count++;
 	}
 }

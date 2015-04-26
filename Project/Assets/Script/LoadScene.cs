@@ -16,4 +16,7 @@ public class LoadScene : MonoBehaviour {
 	public void loadScene(){
 		Application.LoadLevel ("SinglePlayerScene");
 	}
+	public void loadSceneMultiplayer(){
+		Application.LoadLevel ("Multiplayer");
+	}
 }

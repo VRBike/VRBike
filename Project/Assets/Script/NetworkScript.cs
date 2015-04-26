@@ -50,7 +50,6 @@ public class NetworkScript : MonoBehaviour {
 			new ThreadStart(ReceiveData));
 		receiveThread.IsBackground = true;
 		receiveThread.Start();
-		//Application.LoadLevel ("SinglePlayer");
 	}	
 	// Update is called once per frame
 	void Update () {
@@ -90,6 +89,9 @@ public class NetworkScript : MonoBehaviour {
 	}
 	public string getInputText(){
 		return inputText;
+	}
+	public void setSpeed(string n){
+		speed = n;
 	}
 	public string getSpeed(){
 		return speed;
