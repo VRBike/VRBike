@@ -3,13 +3,14 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	
-	public float speed= 0;
-	public float angle = 0;
+	float speed = 0;
+	float angle = 0;
 	NetworkScript MC;
 	
 	void Start(){
+		ApplicationDOA.getInstance ().set_age (24);
+		ApplicationDOA.getInstance ().set_weight (65);
 		MC = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkScript>();
-		
 	}
 	
 	void FixedUpdate(){

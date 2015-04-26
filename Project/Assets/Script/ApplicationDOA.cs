@@ -10,6 +10,9 @@ public class ApplicationDOA{
 	private Boolean passed = false;
 	private float Timer;
 	private Vector3 startPosition;
+	private float age;
+	private float weight;
+	private float distance;
 
 	public ApplicationDOA (){
 
@@ -50,6 +53,30 @@ public class ApplicationDOA{
 
 	public Vector3 get_start_position(){
 		return startPosition;
+	}
+
+	public void set_age(float age){
+		this.age = age;
+	}
+
+	public float get_age(){
+		return age;
+	}
+
+	public void set_weight(float weight){
+		this.weight = weight;
+	}
+
+	public float get_weight(){
+		return weight;
+	}
+
+	public void set_distance(float distance){
+		this.distance = distance;
+	}
+
+	public float get_distance(){
+		return distance;
 	}
 		
 	public Boolean passedCheckpoint(){
