@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Multiplayer\PlayerControllerMultiplayer.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\Desktop\Thesis Project\VRBike\Assets\Script\Multiplayer\PlayerControllerMultiplayer.cs">
     <Files>
-      <File FileName="Assets\Script\Multiplayer\PlayerControllerMultiplayer.cs" Line="15" Column="2" />
-      <File FileName="..\..\..\..\..\..\Documents\New Unity Project\Assets\Script\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\..\Desktop\Thesis Project\VRBike\Assets\Script\Multiplayer\MultiplayerController.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\..\Desktop\Thesis Project\VRBike\Assets\Script\Multiplayer\PlayerControllerMultiplayer.cs" Line="241" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

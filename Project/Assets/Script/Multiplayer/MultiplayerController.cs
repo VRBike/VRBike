@@ -20,10 +20,21 @@ public class MultiplayerController : MonoBehaviour {
 	public Material mat1;
 	public Material mat2;
 
+	public GameObject PauseCanvas;
+	public GameObject AdjustCanvas;
+	public GameObject FinishCanvas;
+	public GameObject Interface;
+
 
 	void Start () {
-		
+		stage.SetActive (false);
+		road.SetActive (false);
+		PauseCanvas.SetActive (false);
+		AdjustCanvas.SetActive (false);
+		FinishCanvas.SetActive (false);
+		Interface.SetActive (false);
 	}	
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -50,10 +61,15 @@ public class MultiplayerController : MonoBehaviour {
 	void CreateStage(){
 
 		//Network.Instantiate (stage,new Vector3(0f,0.5f,0f),Quaternion.identity, 0);
-
+		ApplicationDOA.getInstance ().SetGameState (GameState.Playing);
 		RenderSettings.skybox = mat2;
 		stage.SetActive (true);
 		road.SetActive (true);
+		PauseCanvas.SetActive (true);
+		AdjustCanvas.SetActive(true);
+		ApplicationDOA.getInstance ().SetGameState (GameState.Ready);
+
+		Interface.SetActive (true);
 	}
 	public void RefreshHostList(){
 		MasterServer.RequestHostList (typeName);

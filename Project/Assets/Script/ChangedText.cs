@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class ChangedText : MonoBehaviour {
 	
-	Vector3 lastPosition = new Vector3(0, 0, 0);
-	float distanceTravelled = 0;
-	NetworkScript MC;
-	double calories_burned = 0;
+	private Vector3 lastPosition = new Vector3(0, 0, 0);
+	private float distanceTravelled = 0;
+	private NetworkScript MC;
+	private double calories_burned = 0;
 
 	// Use this for initialization
 	void Start () {
-		MC = GameObject.Find("Network").GetComponent<NetworkScript>();
+		//MC = GameObject.Find("Network").GetComponent<NetworkScript>();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +19,9 @@ public class ChangedText : MonoBehaviour {
 		timeText ();
 		speedText ();
 		distanceText ();
+		if(ApplicationDOA.getInstance().gameState == GameState.Finish && ApplicationDOA.getInstance().gameMode == GameMode.Single){
+			result_time();
+		}
 		caloriesText ();
 	}
 
@@ -54,7 +57,20 @@ public class ChangedText : MonoBehaviour {
 	
 		// double calories_burned = ((weight * 0.3) * distance) / 10;
 		calories_burned += (((k1 * speed) + (k2 * Mathf.Pow(speed, 3))) / 69.78) / 60;
-
+		ApplicationDOA.getInstance ().set_calories ((float)calories_burned);
 		calories.text = calories_burned.ToString ("####0.0");
+	}
+
+	public void result_time(){
+		Text time = GameObject.Find ("ResultTime").GetComponent<Text> ();
+		float resultime = ApplicationDOA.getInstance().getTime();
+
+		time.text = resultime.ToString ("####0.0");
+	}
+
+	public void result_calories(){
+		Text calories = GameObject.Find ("ResultCalories").GetComponent<Text> ();
+		float result_calories = ApplicationDOA.getInstance ().get_calories ();
+		calories.text = result_calories.ToString ();
 	}
 }

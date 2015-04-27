@@ -7,12 +7,14 @@ public class ApplicationControl : MonoBehaviour {
 	bool paused = false;
 	public GameObject PauseCanvas;
 	public GameObject AdjustCanvas;
-	private bool isShowing;
+	public GameObject FinishCanvas;
+	public ChangedText changedtext;
 
 	// Use this for initialization
 	void Start () {
 		PauseCanvas.SetActive (false);
 		AdjustCanvas.SetActive (false);
+		FinishCanvas.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -22,31 +24,33 @@ public class ApplicationControl : MonoBehaviour {
 			if(paused == false){
 				OnPauseGame();
 				paused = true;
-				//OnApplicationPause(false);
 			}
 		}
 	}
 
 	public void OnPauseGame(){
 		print ("paused");
-		isShowing = !isShowing;
+		ApplicationDOA.getInstance ().SetGameState (GameState.Paused);
 		PauseCanvas.SetActive(true);
 		AdjustCanvas.SetActive (true);
 	}
 
 	public void OnResumeGame(){
 		print ("resume");
-		isShowing = !isShowing;
+		ApplicationDOA.getInstance ().SetGameState (GameState.Playing);
 		PauseCanvas.SetActive(false);
 		AdjustCanvas.SetActive (false);
-		paused = false;
 	}
 
 	public void OnFinishGame(){
+		print ("finish");
+		ApplicationDOA.getInstance ().SetGameState (GameState.Finish);
+		PauseCanvas.SetActive(false);
+		AdjustCanvas.SetActive (false);
+		FinishCanvas.SetActive (false);
 
+		changedtext.result_time ();
+
+		ApplicationDOA.getInstance().endTimer();
 	}
-	
-	/*void OnApplicationPause(bool pauseStatus) {
-		paused = pauseStatus;
-	}*/
 }

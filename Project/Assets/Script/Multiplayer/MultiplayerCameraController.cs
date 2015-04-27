@@ -15,8 +15,10 @@ public class MultiplayerCameraController : MonoBehaviour {
 		GameObject[] p = GameObject.FindGameObjectsWithTag("Player");
 		
 		for(int i=0;i<p.Length;i++){
+
 			if(p[i].networkView.isMine){
 				target = p[i];
+
 			}
 		}
 		Vector3 offset = new Vector3(0,0,0);

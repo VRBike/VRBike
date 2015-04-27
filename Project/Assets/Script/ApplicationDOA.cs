@@ -2,7 +2,12 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-		
+	
+public enum GameState{MainMenu, Ready, Playing, Paused, Finish};
+public delegate void OnStateChangeHandler();
+
+public enum GameMode{MainMenu, Single, Multi};
+
 public class ApplicationDOA{
 		
 	private static ApplicationDOA instance = null;
@@ -13,6 +18,10 @@ public class ApplicationDOA{
 	private float age;
 	private float weight;
 	private float distance;
+	private Boolean finish_game = false;
+	private float calories;
+	
+	public event OnStateChangeHandler OnStateChange;
 
 	public ApplicationDOA (){
 
@@ -21,6 +30,21 @@ public class ApplicationDOA{
 	public static ApplicationDOA getInstance(){
 		if(instance == null) instance = new ApplicationDOA ();
 		return instance;
+	}
+
+	public GameMode gameMode{ get; private set;}
+
+	public void SetGameMode(GameMode gameMode){
+		this.gameMode = gameMode;
+	}
+
+	public GameState gameState{ get; private set;}
+
+	public void SetGameState(GameState gameState){
+		this.gameState = gameState;
+		if(OnStateChange != null) {
+			OnStateChange();
+		}
 	}
 
 	public void set_generate_points_position(List<Vector3> position){
@@ -41,6 +65,10 @@ public class ApplicationDOA{
 
 	public void startTimer(){
 		Timer += Time.deltaTime;
+	}
+
+	public void endTimer(){
+		Timer = 0;
 	}
 
 	public float getTime (){
@@ -78,14 +106,13 @@ public class ApplicationDOA{
 	public float get_distance(){
 		return distance;
 	}
-		
-	public Boolean passedCheckpoint(){
 
-		List<Vector3> list = ApplicationDOA.getInstance ().get_generate_points_position ();
-		if (GameObject.Find ("Player").transform.position.z >= list [list.Count - 2].z)
-			ApplicationDOA.getInstance().set_passedCheckpoint(true);
+	public void set_calories(float calories){
+		this.calories = calories;
+	}
 
-		return ApplicationDOA.getInstance().get_passedCheckpoint();
+	public float get_calories(){
+		return calories;
 	}
 }
 
