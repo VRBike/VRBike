@@ -11,7 +11,7 @@ public class ChangedText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//MC = GameObject.Find("Network").GetComponent<NetworkScript>();
+		MC = GameObject.Find("Network").GetComponent<NetworkScript>();
 	}
 	
 	// Update is called once per frame
