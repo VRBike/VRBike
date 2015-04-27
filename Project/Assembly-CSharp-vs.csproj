@@ -67,6 +67,7 @@
      <Compile Include="Assets\RoadTool\Scripts\Road.cs" />
      <Compile Include="Assets\Script\ApplicationControl.cs" />
      <Compile Include="Assets\Script\ApplicationDOA.cs" />
+     <Compile Include="Assets\Script\CameraController.cs" />
      <Compile Include="Assets\Script\ChangedColor.cs" />
      <Compile Include="Assets\Script\ChangedText.cs" />
      <Compile Include="Assets\Script\EnvironmentGenerator.cs" />
