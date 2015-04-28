@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\CameraController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Multiplayer\PlayerControllerMultiplayer.cs">
     <Files>
-      <File FileName="Assets\Script\CameraController.cs" Line="12" Column="66" />
+      <File FileName="Assets\Script\Multiplayer\MultiplayerController.cs" Line="93" Column="40" />
+      <File FileName="Assets\Script\Multiplayer\PlayerControllerMultiplayer.cs" Line="60" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

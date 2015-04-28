@@ -88,6 +88,10 @@ public class MultiplayerController : MonoBehaviour {
 		}
 
 	}
+	void OnPlayerDisconnected(NetworkPlayer player){
+		Network.RemoveRPCs(player);
+		Network.DestroyPlayerObjects(player);
+	}
 	private void ListServer(){
 		foreach(GameObject child in GameObject.FindGameObjectsWithTag("ServerName")){
 			Destroy(child);

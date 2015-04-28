@@ -10,6 +10,7 @@ public class MultiPlayerApplicationControl : MonoBehaviour {
 	private GameObject Interface;
 	private bool inGame;
 
+	private GameObject thisPlayer;
 	// Use this for initialization
 	void Start () {
 		Interface = GameObject.Find ("Interface");
@@ -20,6 +21,15 @@ public class MultiPlayerApplicationControl : MonoBehaviour {
 		AdjustCanvas.SetActive (false);
 		FinishCanvas.SetActive (false);
 		inGame = false;
+
+		GameObject[] p = GameObject.FindGameObjectsWithTag("Player");
+		
+		for (int i=0; i<p.Length; i++) {
+			
+			if (p [i].networkView.isMine) {
+				thisPlayer = p[i];
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -75,12 +85,18 @@ public class MultiPlayerApplicationControl : MonoBehaviour {
 		
 		GameObject[] p = GameObject.FindGameObjectsWithTag("Player");
 		
-		for (int i=0; i<p.Length; i++) {
+		//for (int i=0; i<p.Length; i++) {
 			
-			if (p [i].networkView.isMine) {
-				p [i].GetComponent<PlayerControllerMultiplayer> ().SendStartGame ();
+		//	if (p [i].networkView.isMine) {
+		//		p [i].GetComponent<PlayerControllerMultiplayer> ().SendStartGame ();
 				
-			}
-		}
+		//	}
+		//}
+		thisPlayer.GetComponent<PlayerControllerMultiplayer> ().SendStartGame ();
 	}
+
+	public void PlayerResetPosition(){
+		thisPlayer.GetComponent<PlayerControllerMultiplayer> ().ReBorn ();
+	}
+
 }
